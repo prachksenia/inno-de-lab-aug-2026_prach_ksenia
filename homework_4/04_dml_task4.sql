@@ -9,10 +9,16 @@ UPDATE employees
 SET salary = salary * 1.10
 WHERE department = 'HR';
 
--- 2. Department = 'Senior IT' для всех с Salary > 70000
+-- 2. Обновить Department одного сотрудника с Salary > 70000 на 'Senior IT'
 UPDATE employees
 SET department = 'Senior IT'
-WHERE salary > 70000.00;
+WHERE employeeid = (
+    SELECT employeeid
+    FROM employees
+    WHERE salary > 70000.00
+    ORDER BY employeeid
+    LIMIT 1
+);
 
 -- 3. Удалить сотрудников без проектов (NOT EXISTS)
 DELETE FROM employees e

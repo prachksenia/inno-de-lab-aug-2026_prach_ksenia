@@ -35,10 +35,5 @@ SELECT
 FROM employees
 WHERE department = 'IT';
 
--- После задания 4 в отделе 'IT' никого не осталось, добавляем сотрудника IT для демонстации 
-INSERT INTO employees (firstname, lastname, department, salary, email)
-VALUES ('Elena', 'Sokolova', 'IT', 72000.00, 'elena.sokolova@company.com');
-
-
 -- 4. SELECT из представления
 SELECT * FROM it_department_view;
