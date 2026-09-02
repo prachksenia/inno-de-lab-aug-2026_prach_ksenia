@@ -1,13 +1,13 @@
 # Homework 8, Task 3: Safe return processing with try-except-finally
 
-from typing import Any, Optional, Tuple
+from typing import Any
 
 DEFAULT_RETURN_INDEX_BASE = 10.0
 
 
 def calculate_overdue_fine(
-        film_title: str, days_overdue: Any, fine_rate: float
-) -> Optional[Tuple[float, float]]:
+    film_title: str, days_overdue: Any, fine_rate: float
+) -> tuple[float, float] | None:
     """Безопасно рассчитывает штраф за просрочку и индекс оборачиваемости.
 
     Обрабатывает типы ошибок:
@@ -21,14 +21,11 @@ def calculate_overdue_fine(
         fine_rate (float): Ставка штрафа за один день просрочки.
 
     Returns:
-        Optional[Tuple[float, float]]: Кортеж (total_fine, return_index) в случае успеха,
+        tuple[float, float] | None: Кортеж (total_fine, return_index) в случае успеха,
             или None, если возникла ошибка.
     """
     try:
         numeric_days = float(days_overdue)
-        if numeric_days == 0:
-            raise ZeroDivisionError("float division by zero")
-
         total_fine = numeric_days * fine_rate
         return_index = DEFAULT_RETURN_INDEX_BASE / numeric_days
 
@@ -39,13 +36,13 @@ def calculate_overdue_fine(
         print(f"[ОШИБКА ТИПА] Некорректный тип данных для '{film_title}': {e}")
         return None
     except ValueError as e:
-        print(f"[ОШИБКА ЗНАЧЕНИЯ] Некоректная строка с днями просрочки для '{film_title}': {e}")
+        print(f"[ОШИБКА ЗНАЧЕНИЯ] Невозможно преобразовать дни в число для '{film_title}': {e}")
         return None
     except ZeroDivisionError as e:
         print(f"[ОШИБКА ДЕЛЕНИЯ НА НОЛЬ] Возврат без просрочки для '{film_title}': {e}")
         return None
     finally:
-        print("Проверка транзакции возврата завершена")
+        print("--- Проверка транзакции возврата завершена ---")
 
 
 # Тестирование обработки ошибок

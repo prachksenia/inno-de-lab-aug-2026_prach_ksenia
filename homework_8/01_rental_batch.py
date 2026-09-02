@@ -1,13 +1,11 @@
 # Homework 8, Task 1: Wholesale movie rental calculation
 
-from typing import Tuple
-
 MAX_RENTAL_BATCH_LIMIT = 150.0
 
 
 def calculate_rental_batch(
-        quantity: int, rental_rate: float, discount: float = 0.0
-) -> Tuple[float, bool]:
+    quantity: int, rental_rate: float, discount: float = 0.0
+) -> tuple[float, bool]:
     """Рассчитывает стоимость партии аренды и проверяет превышение лимита.
 
     Args:
@@ -16,7 +14,7 @@ def calculate_rental_batch(
         discount (float, optional): Размер скидки (например, 0.10 для 10%). По умолчанию 0.0.
 
     Returns:
-        Tuple[float, bool]: Кортеж из двух элементов:
+        tuple[float, bool]: Кортеж из двух элементов:
             - final_sum (float): Итоговая стоимость партии с округлением до 2 знаков.
             - is_limit_exceeded (bool): Флаг превышения лимита MAX_RENTAL_BATCH_LIMIT.
     """

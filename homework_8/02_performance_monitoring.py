@@ -1,7 +1,7 @@
 # Homework 8, Task 2: Analytics performance monitoring
 
 import time
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable
 
 PERFORMANCE_LOG_PREFIX = "[PERF_LOG]"
 TIME_DECIMALS = 8
@@ -30,14 +30,14 @@ def performance_logger(func: Callable) -> Callable:
 
 
 @performance_logger
-def get_sorted_report(data: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def get_sorted_report(data: list[dict[str, str | float]]) -> list[dict[str, str | float]]:
     """Сортирует список категорий по убыванию выручки.
 
     Args:
-        data (List[Dict[str, Any]]): Список словарей с данными по категориям и выручке.
+        data (list[dict[str, str | float]]): Список словарей с данными по категориям и выручке.
 
     Returns:
-        List[Dict[str, Any]]: Отсортированный по убыванию total_sales список словарей.
+        list[dict[str, str | float]]: Отсортированный по убыванию total_sales список словарей.
     """
     return sorted(data, key=lambda item: item["total_sales"], reverse=True)
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
     print("=== ТЕСТИРОВАНИЕ ПРОИЗВОДИТЕЛЬНОСТИ ===")
     for idx, test in enumerate(tests, start=1):
-        print(f"ТЕСТ {idx}")
+        print(f"--- ТЕСТ {idx} ---")
         report = get_sorted_report(test)
         print("Топ категорий по выручке:")
         for item_idx, item in enumerate(report, start=1):
